@@ -1,7 +1,44 @@
 {
-  "eslint.workingDirectories": [
-    {
-      "mode": "auto"
-    }
-  ]
+  // Formatting
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "biomejs.biome",
+
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+
+  // TypeScript / TS Server
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+
+  // Run organize imports via Biome on save
+  "editor.codeActionsOnSave": {
+    "source.organizeImports.biome": "explicit"
+  },
+
+  // Biome CLI integration
+  "biome.lsp.trace.server": "off",
+  "biome.lsp.bin": "node_modules/.bin/biome",
+
+  // General editor preferences
+  "files.exclude": {
+    "dist": true,
+    "coverage": true
+  },
+  "search.exclude": {
+    "dist": true,
+    "coverage": true,
+    "node_modules": true
+  }
 }
+
+
