@@ -36,4 +36,4 @@ pre-push:
       run: pnpm turbo run test --filter=* # run tests in all packages
 
     typecheck:
-      run: pnpm turbo run build --filter=* --dry-run # typecheck / build in all packages
+      run: pnpm turbo run build --filter=*
