@@ -29,6 +29,9 @@ importers:
 
   apps/api-gateway:
     dependencies:
+      '@nest-starter/logger':
+        specifier: workspace:*
+        version: link:../../packages/logger
       '@nestjs/common':
         specifier: ^11.0.1
         version: 11.1.9(reflect-metadata@0.2.2)(rxjs@7.8.2)
@@ -93,6 +96,8 @@ importers:
       typescript:
         specifier: ^5.7.3
         version: 5.9.2
+
+  packages/logger: {}
 
 packages:
 

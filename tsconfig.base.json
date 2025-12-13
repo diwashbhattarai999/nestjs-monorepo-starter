@@ -1,8 +1,8 @@
 {
 	"compilerOptions": {
 		/* Language & Environment */
-		"target": "ES2022",
-		"lib": ["ES2022"],
+		"target": "es2023",
+		"lib": ["ES2023"],
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
 
@@ -36,6 +36,9 @@
 		"paths": {
 			"@repo/*": ["packages/*/src"],
 			"@apps/*": ["apps/*/src"]
-		}
+		},
+
+		/* Ensure Node globals like `console` are available */
+		"types": ["node"]
 	}
 }
