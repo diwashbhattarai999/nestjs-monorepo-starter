@@ -34,7 +34,7 @@
 		/* Monorepo Paths */
 		"baseUrl": ".",
 		"paths": {
-			"@repo/*": ["packages/*/src"],
+			"@nest-starter/*": ["packages/*/src"],
 			"@apps/*": ["apps/*/src"]
 		},
 
