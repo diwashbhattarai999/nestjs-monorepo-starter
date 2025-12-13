@@ -1,4 +1,4 @@
-import { ApiGatewayConfigSchema, ConfigModule } from "@nest-starter/config";
+import { ApiGatewayConfig, ApiGatewayConfigSchema, ConfigModule } from "@nest-starter/config";
 import { INJECTION_TOKENS } from "@nest-starter/core";
 import { KafkaModule } from "@nest-starter/microservices";
 import { Module } from "@nestjs/common";
@@ -8,7 +8,18 @@ import { AppService } from "./app.service";
 import { AuthModule } from "./auth/auth.module";
 
 @Module({
-	imports: [ConfigModule.forRoot(ApiGatewayConfigSchema, INJECTION_TOKENS.API_GATEWAY_CONFIG), KafkaModule, AuthModule],
+	imports: [
+		ConfigModule.forRoot(ApiGatewayConfigSchema, INJECTION_TOKENS.API_GATEWAY_CONFIG),
+		KafkaModule.registerAsync({
+			inject: [INJECTION_TOKENS.API_GATEWAY_CONFIG],
+			useFactory: (config: ApiGatewayConfig) => ({
+				clientId: config.KAFKA_CLIENT_ID,
+				groupId: config.KAFKA_GROUP_ID,
+				brokers: [config.KAFKA_BROKERS],
+			}),
+		}),
+		AuthModule,
+	],
 	controllers: [AppController],
 	providers: [AppService],
 })

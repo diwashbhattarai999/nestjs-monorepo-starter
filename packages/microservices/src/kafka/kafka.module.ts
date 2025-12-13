@@ -1,36 +1,76 @@
 import { INJECTION_TOKENS } from "@nest-starter/core";
-import { Global, Module } from "@nestjs/common";
+import { DynamicModule, Global, Module } from "@nestjs/common";
 import { ClientsModule, Transport } from "@nestjs/microservices";
 
-// Read kafka configuration from environment variables (loaded by ConfigModule)
-function parseBrokers(brokers?: string) {
-	if (!brokers) return ["localhost:9092"];
-	return brokers
-		.split(",")
-		.map((b) => b.trim())
-		.filter(Boolean);
+interface KafkaModuleOptions {
+	clientId: string;
+	groupId: string;
+	brokers: string[];
+	subscribeFromBeginning?: boolean;
+}
+
+interface AsyncKafkaModuleOptions {
+	// biome-ignore lint/suspicious/noExplicitAny: Argument of type 'any' is acceptable here
+	useFactory: (...args: any[]) => Promise<KafkaModuleOptions> | KafkaModuleOptions;
+	inject?: unknown[];
 }
 
 @Global()
-@Module({
-	imports: [
-		ClientsModule.register([
-			{
-				name: INJECTION_TOKENS.KAFKA_SERVICE,
-				transport: Transport.KAFKA,
-				options: {
-					client: {
-						brokers: parseBrokers(process.env.KAFKA_BROKERS),
-						clientId: process.env.KAFKA_CLIENT_ID ?? "nestjs-client",
+@Module({})
+export class KafkaModule {
+	static register(options: KafkaModuleOptions): DynamicModule {
+		return {
+			module: KafkaModule,
+			imports: [
+				ClientsModule.register([
+					{
+						name: INJECTION_TOKENS.KAFKA_SERVICE,
+						transport: Transport.KAFKA,
+						options: {
+							client: {
+								brokers: options.brokers,
+								clientId: options.clientId,
+							},
+							consumer: {
+								groupId: options.groupId,
+							},
+							subscribe: { fromBeginning: options.subscribeFromBeginning ?? true },
+						},
 					},
-					consumer: {
-						groupId: process.env.KAFKA_GROUP_ID ?? "nestjs-microservice-group",
+				]),
+			],
+			exports: [ClientsModule],
+		};
+	}
+
+	static registerAsync(options: AsyncKafkaModuleOptions): DynamicModule {
+		return {
+			module: KafkaModule,
+			imports: [
+				ClientsModule.registerAsync([
+					{
+						name: INJECTION_TOKENS.KAFKA_SERVICE,
+						useFactory: async (...args: unknown[]) => {
+							const opts = await options.useFactory(...args);
+							return {
+								transport: Transport.KAFKA,
+								options: {
+									client: {
+										brokers: opts.brokers,
+										clientId: opts.clientId,
+									},
+									consumer: {
+										groupId: opts.groupId,
+									},
+									subscribe: { fromBeginning: opts.subscribeFromBeginning ?? true },
+								},
+							};
+						},
+						inject: options.inject || [],
 					},
-					subscribe: { fromBeginning: true },
-				},
-			},
-		]),
-	],
-	exports: [ClientsModule],
-})
-export class KafkaModule {}
+				]),
+			],
+			exports: [ClientsModule],
+		};
+	}
+}
