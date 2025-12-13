@@ -1,11 +1,14 @@
-import { API_GATEWAY_CONFIG, ApiGatewayConfigSchema, ConfigModule } from "@nest-starter/config";
+import { ApiGatewayConfigSchema, ConfigModule } from "@nest-starter/config";
+import { INJECTION_TOKENS } from "@nest-starter/core";
+import { KafkaModule } from "@nest-starter/microservices";
 import { Module } from "@nestjs/common";
 
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
+import { EventsModule } from "./events/events.module";
 
 @Module({
-	imports: [ConfigModule.forRoot(ApiGatewayConfigSchema, API_GATEWAY_CONFIG)],
+	imports: [ConfigModule.forRoot(ApiGatewayConfigSchema, INJECTION_TOKENS.API_GATEWAY_CONFIG), KafkaModule, EventsModule],
 	controllers: [AppController],
 	providers: [AppService],
 })

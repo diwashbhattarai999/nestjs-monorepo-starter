@@ -20,7 +20,11 @@
 		"test:e2e": "jest --config ./test/jest-e2e.json"
 	},
 	"dependencies": {
-		"@nest-starter/config": "workspace:^"
+		"@nest-starter/config": "workspace:^",
+		"@nest-starter/core": "workspace:^",
+		"@nest-starter/microservices": "workspace:^",
+		"@nestjs/microservices": "^11.1.9",
+		"kafkajs": "^2.2.4"
 	},
 	"devDependencies": {
 		"@nestjs/cli": "^11.0.0",

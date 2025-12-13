@@ -5,6 +5,7 @@
 		{ "path": "apps/api-gateway" },
 		{ "path": "apps/auth-service" },
 		{ "path": "packages/config" },
-		{ "path": "packages/core" }
+		{ "path": "packages/core" },
+		{ "path": "packages/microservices" }
 	]
 }

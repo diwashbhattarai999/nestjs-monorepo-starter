@@ -1,5 +1,6 @@
 import type { ApiGatewayConfig } from "@nest-starter/config";
-import { API_GATEWAY_CONFIG, DEFAULT_CONFIG } from "@nest-starter/config";
+import { DEFAULT_CONFIG } from "@nest-starter/config";
+import { INJECTION_TOKENS } from "@nest-starter/core";
 import { Logger } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
@@ -14,8 +15,8 @@ async function bootstrap() {
 	app.enableShutdownHooks();
 
 	// Retrieve the typed config object provided by ConfigModule
-	const config = app.get<ApiGatewayConfig>(API_GATEWAY_CONFIG);
-	const port = config?.PORT ?? Number(process.env.PORT) ?? DEFAULT_CONFIG.AUTH_SERVICE_PORT;
+	const config = app.get<ApiGatewayConfig>(INJECTION_TOKENS.API_GATEWAY_CONFIG);
+	const port = config?.PORT ?? Number(process.env.PORT) ?? DEFAULT_CONFIG.API_GATEWAY_PORT;
 
 	// Start the application and listen on the specified port and all network interfaces
 	await app.listen(port, "0.0.0.0");

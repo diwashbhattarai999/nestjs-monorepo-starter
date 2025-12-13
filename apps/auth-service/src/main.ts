@@ -1,27 +1,49 @@
 import type { ApiGatewayConfig } from "@nest-starter/config";
-import { API_GATEWAY_CONFIG, DEFAULT_CONFIG } from "@nest-starter/config";
+import { DEFAULT_CONFIG } from "@nest-starter/config";
+import { INJECTION_TOKENS } from "@nest-starter/core";
 import { Logger } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
+import { MicroserviceOptions, Transport } from "@nestjs/microservices";
 import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
 
 import { AppModule } from "./app.module";
 
 async function bootstrap() {
-	// Create the NestJS application using the Fastify adapter
 	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
 
-	// Enable graceful shutdown hooks
 	app.enableShutdownHooks();
 
-	// Retrieve the typed config object provided by ConfigModule
-	const config = app.get<ApiGatewayConfig>(API_GATEWAY_CONFIG);
+	const config = app.get<ApiGatewayConfig>(INJECTION_TOKENS.AUTH_SERVICE_CONFIG);
 	const port = config?.PORT ?? Number(process.env.PORT) ?? DEFAULT_CONFIG.AUTH_SERVICE_PORT;
 
-	// Start the application and listen on the specified port and all network interfaces
+	/**
+	 * Kafka microservice (consumer)
+	 */
+	app.connectMicroservice<MicroserviceOptions>({
+		transport: Transport.KAFKA,
+		options: {
+			client: {
+				clientId: config.KAFKA_CLIENT_ID || "api-gateway-client",
+				brokers: [config.KAFKA_BROKERS],
+			},
+			consumer: {
+				groupId: config.KAFKA_GROUP_ID || "api-gateway-consumer",
+			},
+		},
+	});
+
+	/**
+	 * Start Kafka consumer
+	 */
+	await app.startAllMicroservices();
+
+	/**
+	 * Start HTTP server
+	 */
 	await app.listen(port, "0.0.0.0");
 
-	const baseUrl = config.BASE_URL || `http://localhost:${port}`;
-	Logger.log(`Server is running on ${baseUrl}`);
+	Logger.log(`HTTP server running on ${config.BASE_URL}`);
+	Logger.log(`Kafka consumer started`);
 }
 
 bootstrap();
