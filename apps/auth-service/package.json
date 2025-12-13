@@ -22,6 +22,7 @@
 	"dependencies": {
 		"@nest-starter/config": "workspace:^",
 		"@nest-starter/core": "workspace:^",
+		"@nest-starter/contracts": "workspace:^",
 		"@nest-starter/microservices": "workspace:^",
 		"@nestjs/microservices": "^11.1.9",
 		"kafkajs": "^2.2.4"

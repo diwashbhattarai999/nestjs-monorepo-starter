@@ -60,6 +60,9 @@ importers:
       '@nest-starter/config':
         specifier: workspace:^
         version: link:../../packages/config
+      '@nest-starter/contracts':
+        specifier: workspace:^
+        version: link:../../packages/contracts
       '@nest-starter/core':
         specifier: workspace:^
         version: link:../../packages/core
@@ -121,6 +124,9 @@ importers:
       '@nest-starter/config':
         specifier: workspace:^
         version: link:../../packages/config
+      '@nest-starter/contracts':
+        specifier: workspace:^
+        version: link:../../packages/contracts
       '@nest-starter/core':
         specifier: workspace:^
         version: link:../../packages/core
@@ -185,6 +191,19 @@ importers:
       '@nestjs/config':
         specifier: ^4.0.2
         version: 4.0.2(@nestjs/common@11.1.9(reflect-metadata@0.2.2)(rxjs@7.8.2))(rxjs@7.8.2)
+      zod:
+        specifier: ^4.1.13
+        version: 4.1.13
+    devDependencies:
+      tsc-alias:
+        specifier: ^1.8.16
+        version: 1.8.16
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
+  packages/contracts:
+    dependencies:
       zod:
         specifier: ^4.1.13
         version: 4.1.13

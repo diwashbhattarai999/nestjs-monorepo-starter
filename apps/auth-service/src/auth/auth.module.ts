@@ -1,10 +1,10 @@
 import { KafkaModule } from "@nest-starter/microservices";
 import { Module } from "@nestjs/common";
 
-import { EventsController } from "./events.controller";
+import { AuthController } from "./auth.controller";
 
 @Module({
 	imports: [KafkaModule],
-	controllers: [EventsController],
+	controllers: [AuthController],
 })
-export class EventsModule {}
+export class AuthModule {}

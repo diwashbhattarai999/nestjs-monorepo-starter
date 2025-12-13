@@ -5,10 +5,10 @@ import { Module } from "@nestjs/common";
 
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { EventsModule } from "./events/events.module";
+import { AuthModule } from "./auth/auth.module";
 
 @Module({
-	imports: [ConfigModule.forRoot(ApiGatewayConfigSchema, INJECTION_TOKENS.API_GATEWAY_CONFIG), KafkaModule, EventsModule],
+	imports: [ConfigModule.forRoot(ApiGatewayConfigSchema, INJECTION_TOKENS.API_GATEWAY_CONFIG), KafkaModule, AuthModule],
 	controllers: [AppController],
 	providers: [AppService],
 })
