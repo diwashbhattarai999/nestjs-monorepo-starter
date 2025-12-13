@@ -1,0 +1,41 @@
+{
+	"compilerOptions": {
+		/* Language & Environment */
+		"target": "ES2022",
+		"lib": ["ES2022"],
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+
+		/* Strictness */
+		"strict": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"noUncheckedIndexedAccess": true,
+		"exactOptionalPropertyTypes": true,
+
+		/* Interop */
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+
+		/* Decorators (NestJS) */
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+
+		/* Output */
+		"declaration": true,
+		"declarationMap": true,
+		"sourceMap": true,
+		"incremental": true,
+
+		/* Performance */
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+
+		/* Monorepo Paths */
+		"baseUrl": ".",
+		"paths": {
+			"@repo/*": ["packages/*/src"],
+			"@apps/*": ["apps/*/src"]
+		}
+	}
+}

@@ -12,6 +12,7 @@
 		"lint": "biome lint .",
 		"format": "biome format . --write",
 		"test": "jest",
+		"check-types": "tsc --noEmit",
 		"clean": "rm -rf dist"
 	},
 	"dependencies": {
