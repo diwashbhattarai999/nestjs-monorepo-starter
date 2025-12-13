@@ -37,6 +37,9 @@
 			"recommended": true,
 			"style": {
 				"useImportType": "off"
+			},
+			"complexity": {
+				"noStaticOnlyClass": "off"
 			}
 		}
 	},

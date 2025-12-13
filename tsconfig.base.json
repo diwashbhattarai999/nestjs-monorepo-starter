@@ -36,9 +36,6 @@
 		"paths": {
 			"@nest-starter/*": ["packages/*/src"],
 			"@apps/*": ["apps/*/src"]
-		},
-
-		/* Ensure Node globals like `console` are available */
-		"types": ["node"]
+		}
 	}
 }

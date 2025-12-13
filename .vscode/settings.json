@@ -32,7 +32,8 @@
   // General editor preferences
   "files.exclude": {
     "dist": true,
-    "coverage": true
+    "coverage": true,
+    "node_modules": true
   },
   "search.exclude": {
     "dist": true,

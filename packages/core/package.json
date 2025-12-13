@@ -1,0 +1,21 @@
+{
+	"name": "@nest-starter/core",
+	"version": "0.0.1",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"private": false,
+	"scripts": {
+		"build": "tsc -b && tsc-alias",
+		"clean": "rm -rf dist .tsbuildinfo",
+		"lint": "biome lint src --fix",
+		"format": "biome format src --write"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"packageManager": "pnpm@10.25.0",
+	"devDependencies": {
+		"tsc-alias": "^1.8.16",
+		"typescript": "^5.9.3"
+	}
+}
