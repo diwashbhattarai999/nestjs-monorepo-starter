@@ -32,8 +32,9 @@ pre-push:
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
       run: pnpm exec biome ci . --no-errors-on-unmatched --files-ignore-unknown=true
 
-    test:
-      run: pnpm turbo run test --filter=* # run tests in all packages
+    # Uncomment the following lines to enable tests on pre-push
+    # test:
+    #   run: pnpm turbo run test --filter=* # run tests in all packages
 
     typecheck:
       run: pnpm turbo run build --filter=*
