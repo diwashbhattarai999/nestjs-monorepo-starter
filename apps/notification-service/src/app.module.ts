@@ -1,6 +1,6 @@
 import { ConfigModule, NotificationServiceConfig, NotificationServiceConfigSchema } from "@nest-starter/config";
 import { INJECTION_TOKENS } from "@nest-starter/core";
-import { BullmqModule, KafkaModule } from "@nest-starter/microservices";
+import { BullmqModule, KafkaModule, RedisModule } from "@nest-starter/microservices";
 import { Module } from "@nestjs/common";
 
 import { AuthModule } from "@/auth/auth.module";
@@ -11,6 +11,7 @@ import { AppService } from "./app.service";
 @Module({
 	imports: [
 		ConfigModule.forRoot(NotificationServiceConfigSchema, INJECTION_TOKENS.NOTIFICATION_SERVICE_CONFIG),
+
 		KafkaModule.registerAsync({
 			inject: [INJECTION_TOKENS.NOTIFICATION_SERVICE_CONFIG],
 			useFactory: (config: NotificationServiceConfig) => ({
@@ -19,6 +20,7 @@ import { AppService } from "./app.service";
 				brokers: [config.KAFKA_BROKERS],
 			}),
 		}),
+
 		BullmqModule.registerAsync({
 			inject: [INJECTION_TOKENS.NOTIFICATION_SERVICE_CONFIG],
 			useFactory: (config: NotificationServiceConfig) => ({
@@ -27,6 +29,16 @@ import { AppService } from "./app.service";
 				password: config.REDIS_PASSWORD,
 			}),
 		}),
+
+		RedisModule.forRootAsync({
+			inject: [INJECTION_TOKENS.NOTIFICATION_SERVICE_CONFIG],
+			useFactory: (config: NotificationServiceConfig) => ({
+				host: config.REDIS_HOST,
+				port: config.REDIS_PORT,
+				password: config.REDIS_PASSWORD,
+			}),
+		}),
+
 		AuthModule,
 	],
 	controllers: [AppController],

@@ -1,4 +1,6 @@
-import { DynamicModule, InjectionToken, Module, OptionalFactoryDependency } from "@nestjs/common";
+import { DynamicModule, Global, InjectionToken, Module, OptionalFactoryDependency } from "@nestjs/common";
+
+import { IdempotencyService } from "@/redis/idempotency.service";
 
 import { RedisService } from "./redis.service";
 
@@ -14,6 +16,7 @@ interface AsyncRedisModuleOptions {
 	inject?: (InjectionToken | OptionalFactoryDependency)[];
 }
 
+@Global()
 @Module({})
 export class RedisModule {
 	static forRoot(options: RedisModuleOptions): DynamicModule {
@@ -24,8 +27,9 @@ export class RedisModule {
 					provide: RedisService,
 					useValue: new RedisService(options),
 				},
+				IdempotencyService,
 			],
-			exports: [RedisService],
+			exports: [RedisService, IdempotencyService],
 		};
 	}
 
@@ -42,8 +46,9 @@ export class RedisModule {
 					},
 					inject: options.inject || [],
 				},
+				IdempotencyService,
 			],
-			exports: [RedisService],
+			exports: [RedisService, IdempotencyService],
 		};
 	}
 }

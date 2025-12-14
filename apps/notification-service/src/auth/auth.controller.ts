@@ -13,11 +13,6 @@ export class AuthController {
 	 */
 	@MessagePattern(AuthEvents.UserCreated_Notification_V1)
 	async sendUserCreatedNotification(@Payload() payload: UserCreatedNotificationEvent) {
-		console.log("UserCreatedNotification event received:", payload);
-
-		// Here, you would integrate with an email service to send the actual email.
-		console.log(`Sending email to ${payload.payload.email} with subject: ${payload.payload.subject}`);
-
 		// Enqueue email job
 		await this.emailService.sendEmailJob(
 			{
