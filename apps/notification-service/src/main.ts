@@ -13,8 +13,8 @@ async function bootstrap() {
 
 	app.enableShutdownHooks();
 
-	const config = app.get<ApiGatewayConfig>(INJECTION_TOKENS.AUTH_SERVICE_CONFIG);
-	const port = config?.PORT ?? Number(process.env.PORT) ?? DEFAULT_CONFIG.AUTH_SERVICE_PORT;
+	const config = app.get<ApiGatewayConfig>(INJECTION_TOKENS.NOTIFICATION_SERVICE_CONFIG);
+	const port = config?.PORT ?? Number(process.env.PORT) ?? DEFAULT_CONFIG.NOTIFICATION_SERVICE_PORT;
 
 	/**
 	 * Kafka microservice (consumer)
@@ -23,11 +23,11 @@ async function bootstrap() {
 		transport: Transport.KAFKA,
 		options: {
 			client: {
-				clientId: config.KAFKA_CLIENT_ID || "auth-service-client",
+				clientId: config.KAFKA_CLIENT_ID || "notification-service-client",
 				brokers: [config.KAFKA_BROKERS],
 			},
 			consumer: {
-				groupId: config.KAFKA_GROUP_ID || "auth-service-consumer",
+				groupId: config.KAFKA_GROUP_ID || "notification-service-consumer",
 			},
 		},
 	});

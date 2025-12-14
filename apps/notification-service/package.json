@@ -1,5 +1,5 @@
 {
-	"name": "@apps/api-gateway",
+	"name": "@apps/notification-service",
 	"version": "0.0.1",
 	"description": "",
 	"author": "",
@@ -21,10 +21,12 @@
 	},
 	"dependencies": {
 		"@nest-starter/config": "workspace:^",
-		"@nest-starter/core": "workspace:^",
 		"@nest-starter/contracts": "workspace:^",
+		"@nest-starter/core": "workspace:^",
 		"@nest-starter/microservices": "workspace:^",
+		"@nestjs/bullmq": "^11.0.4",
 		"@nestjs/microservices": "^11.1.9",
+		"bullmq": "^5.66.0",
 		"kafkajs": "^2.2.4"
 	},
 	"devDependencies": {

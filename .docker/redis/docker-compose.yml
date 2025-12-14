@@ -1,0 +1,29 @@
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "${REDIS_PORT:-6379}:6379"       # Host port mapping
+    volumes:
+      - redis-data:/data
+    restart: always
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-mystrongpassword}
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD:-mystrongpassword}"]
+
+  redis-ui:
+    image: redislabs/redisinsight:latest
+    container_name: redis-ui
+    ports:
+      - "${REDIS_UI_PORT:-5540}:5540"   
+    environment:
+      - RI_HOST=redis                     
+      - RI_PORT=${REDIS_PORT:-6379}
+      - RI_PASSWORD=${REDIS_PASSWORD:-mystrongpassword}
+      - REDIS_UI_PORT=${REDIS_UI_PORT:-5540}
+    depends_on:
+      - redis
+    restart: always
+
+volumes:
+  redis-data:
