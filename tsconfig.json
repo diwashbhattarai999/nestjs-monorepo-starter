@@ -4,6 +4,8 @@
 	"references": [
 		{ "path": "apps/api-gateway" },
 		{ "path": "apps/auth-service" },
+		{ "path": "apps/notification-service" },
+		{ "path": "apps/notification-worker" },
 		{ "path": "packages/config" },
 		{ "path": "packages/core" },
 		{ "path": "packages/microservices" },

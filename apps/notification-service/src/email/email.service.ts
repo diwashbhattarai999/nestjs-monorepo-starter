@@ -10,12 +10,13 @@ export class EmailService {
 		private readonly emailQueue: Queue,
 	) {}
 
-	async sendEmailJob(data: { to: string; subject: string; body: string }) {
+	async sendEmailJob(data: { to: string; subject: string; body: string }, eventId: string) {
 		await this.emailQueue.add("send-email", data, {
+			jobId: eventId,
 			attempts: 3,
 			backoff: {
 				type: "exponential",
-				delay: 3000,
+				delay: 5000,
 			},
 			removeOnComplete: true,
 			removeOnFail: false,

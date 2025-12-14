@@ -19,10 +19,13 @@ export class AuthController {
 		console.log(`Sending email to ${payload.payload.email} with subject: ${payload.payload.subject}`);
 
 		// Enqueue email job
-		await this.emailService.sendEmailJob({
-			to: payload.payload.email,
-			subject: payload.payload.subject,
-			body: payload.payload.body,
-		});
+		await this.emailService.sendEmailJob(
+			{
+				to: payload.payload.email,
+				subject: payload.payload.subject,
+				body: payload.payload.body,
+			},
+			payload.eventId,
+		);
 	}
 }
