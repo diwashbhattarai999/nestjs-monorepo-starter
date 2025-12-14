@@ -1,5 +1,5 @@
 import { INJECTION_TOKENS } from "@nest-starter/core";
-import { IdempotencyService } from "@nest-starter/microservices";
+import { IdempotencyService } from "@nest-starter/database";
 import { BullModule } from "@nestjs/bullmq";
 import { Module } from "@nestjs/common";
 

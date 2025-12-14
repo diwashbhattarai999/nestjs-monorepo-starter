@@ -9,6 +9,7 @@
 		{ "path": "packages/config" },
 		{ "path": "packages/core" },
 		{ "path": "packages/microservices" },
-		{ "path": "packages/contracts" }
+		{ "path": "packages/contracts" },
+		{ "path": "packages/database" }
 	]
 }

@@ -188,6 +188,9 @@ importers:
       '@nest-starter/core':
         specifier: workspace:^
         version: link:../../packages/core
+      '@nest-starter/database':
+        specifier: workspace:^
+        version: link:../../packages/database
       '@nest-starter/microservices':
         specifier: workspace:^
         version: link:../../packages/microservices
@@ -249,12 +252,12 @@ importers:
       '@nest-starter/config':
         specifier: workspace:^
         version: link:../../packages/config
-      '@nest-starter/contracts':
-        specifier: workspace:^
-        version: link:../../packages/contracts
       '@nest-starter/core':
         specifier: workspace:^
         version: link:../../packages/core
+      '@nest-starter/database':
+        specifier: workspace:^
+        version: link:../../packages/database
       '@nest-starter/microservices':
         specifier: workspace:^
         version: link:../../packages/microservices
@@ -267,9 +270,6 @@ importers:
       bullmq:
         specifier: ^5.66.0
         version: 5.66.0
-      kafkajs:
-        specifier: ^2.2.4
-        version: 2.2.4
     devDependencies:
       '@nestjs/cli':
         specifier: ^11.0.0
@@ -352,6 +352,19 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  packages/database:
+    dependencies:
+      ioredis:
+        specifier: ^5.8.2
+        version: 5.8.2
+    devDependencies:
+      tsc-alias:
+        specifier: ^1.8.16
+        version: 1.8.16
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
   packages/microservices:
     dependencies:
       '@nest-starter/core':
@@ -366,9 +379,6 @@ importers:
       bullmq:
         specifier: ^5.66.0
         version: 5.66.0
-      ioredis:
-        specifier: ^5.8.2
-        version: 5.8.2
     devDependencies:
       tsc-alias:
         specifier: ^1.8.16

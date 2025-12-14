@@ -1,5 +1,5 @@
 import { INJECTION_TOKENS } from "@nest-starter/core";
-import { IdempotencyService, REDIS_KEYS } from "@nest-starter/microservices";
+import { IdempotencyService, REDIS_KEYS } from "@nest-starter/database";
 import { Processor, WorkerHost } from "@nestjs/bullmq";
 import { Logger } from "@nestjs/common";
 import { Job } from "bullmq";

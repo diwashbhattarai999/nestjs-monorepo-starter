@@ -1,6 +1,7 @@
 import { ConfigModule, NotificationWorkerConfig, NotificationWorkerConfigSchema } from "@nest-starter/config";
 import { INJECTION_TOKENS } from "@nest-starter/core";
-import { BullmqModule, RedisModule } from "@nest-starter/microservices";
+import { RedisModule } from "@nest-starter/database";
+import { BullmqModule } from "@nest-starter/microservices";
 import { Module } from "@nestjs/common";
 
 import { EmailModule } from "@/email/email.module";

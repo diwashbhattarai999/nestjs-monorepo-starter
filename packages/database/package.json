@@ -1,5 +1,5 @@
 {
-	"name": "@nest-starter/microservices",
+	"name": "@nest-starter/database",
 	"version": "0.0.1",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -19,9 +19,6 @@
 		"typescript": "^5.9.3"
 	},
 	"dependencies": {
-		"@nest-starter/core": "workspace:^",
-		"@nestjs/bullmq": "^11.0.4",
-		"@nestjs/microservices": "^11.1.9",
-		"bullmq": "^5.66.0"
+		"ioredis": "^5.8.2"
 	}
 }

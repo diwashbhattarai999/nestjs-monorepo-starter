@@ -1,6 +1,7 @@
 import { ConfigModule, NotificationServiceConfig, NotificationServiceConfigSchema } from "@nest-starter/config";
 import { INJECTION_TOKENS } from "@nest-starter/core";
-import { BullmqModule, KafkaModule, RedisModule } from "@nest-starter/microservices";
+import { RedisModule } from "@nest-starter/database";
+import { BullmqModule, KafkaModule } from "@nest-starter/microservices";
 import { Module } from "@nestjs/common";
 
 import { AuthModule } from "@/auth/auth.module";

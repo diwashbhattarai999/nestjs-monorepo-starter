@@ -22,6 +22,7 @@
 	"dependencies": {
 		"@nest-starter/config": "workspace:^",
 		"@nest-starter/core": "workspace:^",
+		"@nest-starter/database": "workspace:^",
 		"@nest-starter/microservices": "workspace:^",
 		"@nestjs/bullmq": "^11.0.4",
 		"@nestjs/microservices": "^11.1.9",
