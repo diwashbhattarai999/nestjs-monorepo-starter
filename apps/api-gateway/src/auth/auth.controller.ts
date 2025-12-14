@@ -11,6 +11,7 @@ export class AuthController {
 	async pingAuth() {
 		const payload: UserCreatedPayload = {
 			email: "john.doe@example.com",
+			// email: "fail@test.com",
 			userId: "12345",
 			createdAt: new Date().toISOString(),
 		};

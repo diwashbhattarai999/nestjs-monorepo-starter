@@ -4,5 +4,6 @@ export const INJECTION_TOKENS = {
 	NOTIFICATION_SERVICE_CONFIG: Symbol("NOTIFICATION_SERVICE_CONFIG"),
 	NOTIFICATION_WORKER_CONFIG: Symbol("NOTIFICATION_WORKER_CONFIG"),
 	KAFKA_SERVICE: Symbol("KAFKA_SERVICE"),
-	BULLMQ_EMAIL_QUEUE: "BULLMQ_EMAIL_QUEUE", // This is a string as BullMQ requires string queue names
+	BULLMQ_EMAIL_QUEUE: "EMAIL_QUEUE", // This is a string as BullMQ requires string queue names
+	BULLMQ_EMAIL_DLQ: "EMAIL_DLQ",
 };
