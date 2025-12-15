@@ -1,9 +1,9 @@
 packages:
-  - apps/*
-  - packages/*
+- apps/*
+- packages/*
 
 onlyBuiltDependencies:
-  - '@nestjs/core'
-  - lefthook
-  - msgpackr-extract
-  - unrs-resolver
+- '@nestjs/core'
+- lefthook
+- msgpackr-extract
+- unrs-resolver

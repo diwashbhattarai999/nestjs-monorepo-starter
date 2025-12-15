@@ -3,9 +3,14 @@ import { INJECTION_TOKENS } from "@nest-starter/core";
 import { Controller, Inject, OnModuleInit } from "@nestjs/common";
 import { ClientKafka, MessagePattern, Payload } from "@nestjs/microservices";
 
+import { PrismaService } from "@/prisma/prisma.service";
+
 @Controller()
 export class AuthController implements OnModuleInit {
-	constructor(@Inject(INJECTION_TOKENS.KAFKA_SERVICE) private readonly client: ClientKafka) {}
+	constructor(
+		@Inject(INJECTION_TOKENS.KAFKA_SERVICE) private readonly client: ClientKafka,
+		private readonly prismaService: PrismaService,
+	) {}
 
 	async onModuleInit() {
 		// ensure client is connected
@@ -20,6 +25,17 @@ export class AuthController implements OnModuleInit {
 		console.log("UserCreated event received:", payload);
 
 		console.log(`Creating user with ID: ${payload.payload.userId} and email: ${payload.payload.email}`);
+		const user = await this.prismaService.user.create({
+			data: {
+				email: payload.payload.email,
+				id: payload.payload.userId,
+				password: "hashed_password_placeholder",
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			},
+		});
+		console.log(`User with ID: ${payload.payload.userId} created in the database.`, user);
+
 		// Emit event to notification-service to send an email
 		this.client.emit(AuthEvents.UserCreated_Notification_V1, {
 			eventId: crypto.randomUUID(),

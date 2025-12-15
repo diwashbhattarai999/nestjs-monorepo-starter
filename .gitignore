@@ -45,3 +45,7 @@ pnpm-debug.log*
 *.pem
 .vscode/
 .idea/
+
+# Prisma generated files
+apps/**/src/generated/
+packages/**/src/generated/

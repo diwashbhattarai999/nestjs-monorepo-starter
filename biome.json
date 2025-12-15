@@ -23,7 +23,8 @@
 			"!**/coverage",
 			"!**/.next",
 			"!**/build",
-			"!**/i18n.generated.ts"
+			"!**/i18n.generated.ts",
+			"!**/generated"
 		]
 	},
 	"formatter": {
